@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:blog_stack/services/crud.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CreateBlog extends StatefulWidget {
   @override
@@ -7,6 +11,18 @@ class CreateBlog extends StatefulWidget {
 
 class _CreateBlogState extends State<CreateBlog> {
   String? author, title, desc;
+
+  Crud crud = new Crud();
+
+  File? SelectedImage;
+
+  Future getImage() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      SelectedImage = image;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,17 +58,35 @@ class _CreateBlogState extends State<CreateBlog> {
             SizedBox(
               height: 10.0,
             ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 16),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(6.0)),
-              height: 150.0,
-              width: MediaQuery.of(context).size.width,
-              child: Icon(
-                Icons.add_a_photo,
-                color: Colors.black45,
-              ),
+            GestureDetector(
+              onTap: () {
+                getImage();
+              },
+              child: SelectedImage != null
+                  ? Container(
+                      margin: EdgeInsets.symmetric(horizontal: 16),
+                      height: 150.0,
+                      width: MediaQuery.of(context).size.width,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(6.0),
+                        child: Image.file(
+                          SelectedImage!,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    )
+                  : Container(
+                      margin: EdgeInsets.symmetric(horizontal: 16),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(6.0)),
+                      height: 150.0,
+                      width: MediaQuery.of(context).size.width,
+                      child: Icon(
+                        Icons.add_a_photo,
+                        color: Colors.black45,
+                      ),
+                    ),
             ),
             SizedBox(
               height: 8,
@@ -74,7 +108,7 @@ class _CreateBlogState extends State<CreateBlog> {
                       hintText: "Title",
                     ),
                     onChanged: (value) {
-                      author = value;
+                      title = value;
                     },
                   ),
                   TextField(
@@ -82,7 +116,7 @@ class _CreateBlogState extends State<CreateBlog> {
                       hintText: "Description",
                     ),
                     onChanged: (value) {
-                      author = value;
+                      desc = value;
                     },
                   )
                 ],
