@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "658522098486",
+    "project_id": "blogstack-deaf4",
+    "storage_bucket": "blogstack-deaf4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:658522098486:android:43a107d345cc2951740197",
+        "android_client_info": {
+          "package_name": "com.avijeet.blog_stack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "658522098486-u9ohoq90o5h84ra24tt4oquoq2ds0p6t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZS_wa3wrbOcOwDqpg0jHl56Ega1_4YjI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "658522098486-u9ohoq90o5h84ra24tt4oquoq2ds0p6t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
