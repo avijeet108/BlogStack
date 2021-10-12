@@ -24,6 +24,11 @@ class _CreateBlogState extends State<CreateBlog> {
     });
   }
 
+  uploadblog() {
+    if (SelectedImage != null) {
+    } else {}
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,9 +52,14 @@ class _CreateBlogState extends State<CreateBlog> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         actions: [
-          Container(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Icon(Icons.file_upload))
+          GestureDetector(
+            onTap: () {
+              uploadblog();
+            },
+            child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Icon(Icons.file_upload)),
+          )
         ],
       ),
       body: Container(
