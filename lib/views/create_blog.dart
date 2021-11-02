@@ -35,14 +35,18 @@ class _CreateBlogState extends State<CreateBlog> {
         _isLoading = true;
       });
 
-      firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
+      firebase_storage.Reference refer = firebase_storage
+          .FirebaseStorage.instance
           .ref()
           .child('blogImages')
           .child("${randomAlphaNumeric(9)}.jpg");
 
-      firebase_storage.UploadTask task = ref.putFile(SelectedImage!);
+      dynamic task = await refer.putFile(SelectedImage!);
 
-      var downloadUrl = await ref.getDownloadURL();
+      String downloadUrl = await refer.getDownloadURL();
+
+      // print("----------------------------------------------------------");
+      // print(downloadUrl);
 
       Map<String, String> blogMap = {
         "imgUrl": downloadUrl,
@@ -51,10 +55,14 @@ class _CreateBlogState extends State<CreateBlog> {
         "desc": desc!,
       };
 
-      crud.addData(blogMap).then((value) {
-        Navigator.pop(context);
+      await crud.addData(blogMap);
+      Navigator.pop(context);
+      setState(() {
+        _isLoading = false;
       });
-    } else {}
+    } else {
+      print("@@@@@@@");
+    }
   }
 
   @override
