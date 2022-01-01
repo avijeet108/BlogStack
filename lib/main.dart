@@ -1,3 +1,4 @@
+import 'package:blog_stack/screens/login.dart';
 import 'package:blog_stack/views/home.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      home: HomePage(),
+      home: Login(),
     );
   }
 }

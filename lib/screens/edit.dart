@@ -1,22 +1,22 @@
-import 'dart:io';
 import 'package:blog_stack/services/crud.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:random_string/random_string.dart';
-import 'package:firebase_core/firebase_core.dart' as firbase_core;
-import 'package:blog_stack/services/user_model.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'dart:io';
 
-class CreateBlog extends StatefulWidget {
+class edit extends StatefulWidget {
+  final String? authName, title, des, blogid, imgurl;
+  const edit({this.authName, this.title, this.des, this.blogid, this.imgurl});
+
   @override
-  _CreateBlogState createState() => _CreateBlogState();
+  _editState createState() => _editState();
 }
 
-class _CreateBlogState extends State<CreateBlog> {
+class _editState extends State<edit> {
   User? user = FirebaseAuth.instance.currentUser;
-  String? author, title, desc;
+  String? author = "", title = "", desc = "", url = "", downloadUrl = "";
 
   Crud crud = new Crud();
 
@@ -33,39 +33,49 @@ class _CreateBlogState extends State<CreateBlog> {
   }
 
   uploadblog() async {
+    print("2222222222222222222222");
     if (SelectedImage != null) {
       setState(() {
         _isLoading = true;
       });
 
+      print("3333333333333333333");
       firebase_storage.Reference refer = firebase_storage
           .FirebaseStorage.instance
           .ref()
           .child('blogImages')
           .child("${randomAlphaNumeric(9)}.jpg");
 
+      print("44444444444444444444444444");
+
       dynamic task = await refer.putFile(SelectedImage!);
 
-      String downloadUrl = await refer.getDownloadURL();
+      print("5555555555555555555");
 
-      // print("----------------------------------------------------------");
-      // print(downloadUrl);
+      downloadUrl = await refer.getDownloadURL();
 
-      Map<String, String> blogMap = {
-        "imgUrl": downloadUrl,
-        "authorName": author!,
-        "title": title!,
-        "desc": desc!,
-      };
-
-      await crud.addData(blogMap, user);
-      Navigator.pop(context);
-      setState(() {
-        _isLoading = false;
-      });
-    } else {
-      //print("@@@@@@@");
+      print("----------------------------------------------------------");
+      print(downloadUrl);
+      // print(author!);
+      // print(desc);
+      // print(title);
     }
+
+    Map<String, String> blogMap = {
+      "imgUrl": downloadUrl!.length == 0 ? widget.imgurl! : downloadUrl!,
+      "authorName": author!.length == 0 ? widget.authName! : author!,
+      "title": title!.length == 0 ? widget.title! : title!,
+      "desc": desc!.length == 0 ? widget.des! : desc!,
+    };
+
+    print("7777777777777");
+    await crud.updateData(blogMap, user, widget.blogid);
+
+    print("88888888888888888");
+    setState(() {
+      _isLoading = false;
+    });
+    Navigator.pop(context);
   }
 
   @override
@@ -101,10 +111,8 @@ class _CreateBlogState extends State<CreateBlog> {
           )
         ],
       ),
-      body: _isLoading
-          ? Container(
-              child: Center(child: CircularProgressIndicator()),
-            )
+      body: _isLoading == true
+          ? Center(child: CircularProgressIndicator())
           : Container(
               child: Column(
                 children: [
@@ -149,27 +157,21 @@ class _CreateBlogState extends State<CreateBlog> {
                     child: Column(
                       children: [
                         TextFormField(
-                          decoration: InputDecoration(
-                            hintText: "Author Name",
-                          ),
-                          onChanged: (value) {
-                            author = value;
-                          },
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            hintText: "Title",
-                          ),
+                          initialValue: widget.title,
                           onChanged: (value) {
                             title = value;
                           },
                         ),
                         TextFormField(
-                          decoration: InputDecoration(
-                            hintText: "Description",
-                          ),
+                          initialValue: widget.des,
                           onChanged: (value) {
                             desc = value;
+                          },
+                        ),
+                        TextFormField(
+                          initialValue: widget.authName,
+                          onChanged: (value) {
+                            author = value;
                           },
                         )
                       ],
