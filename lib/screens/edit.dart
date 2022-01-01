@@ -113,71 +113,74 @@ class _editState extends State<edit> {
       ),
       body: _isLoading == true
           ? Center(child: CircularProgressIndicator())
-          : Container(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      getImage();
-                    },
-                    child: SelectedImage != null
-                        ? Container(
-                            margin: EdgeInsets.symmetric(horizontal: 16),
-                            height: 150.0,
-                            width: MediaQuery.of(context).size.width,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(6.0),
-                              child: Image.file(
-                                SelectedImage!,
-                                fit: BoxFit.cover,
+          : SingleChildScrollView(
+              child: Container(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        getImage();
+                      },
+                      child: SelectedImage != null
+                          ? Container(
+                              margin: EdgeInsets.symmetric(horizontal: 16),
+                              height: 150.0,
+                              width: MediaQuery.of(context).size.width,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(6.0),
+                                child: Image.file(
+                                  SelectedImage!,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            )
+                          : Container(
+                              margin: EdgeInsets.symmetric(horizontal: 16),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(6.0)),
+                              height: 150.0,
+                              width: MediaQuery.of(context).size.width,
+                              child: Icon(
+                                Icons.add_a_photo,
+                                color: Colors.black45,
                               ),
                             ),
-                          )
-                        : Container(
-                            margin: EdgeInsets.symmetric(horizontal: 16),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(6.0)),
-                            height: 150.0,
-                            width: MediaQuery.of(context).size.width,
-                            child: Icon(
-                              Icons.add_a_photo,
-                              color: Colors.black45,
-                            ),
-                          ),
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          initialValue: widget.title,
-                          onChanged: (value) {
-                            title = value;
-                          },
-                        ),
-                        TextFormField(
-                          initialValue: widget.des,
-                          onChanged: (value) {
-                            desc = value;
-                          },
-                        ),
-                        TextFormField(
-                          initialValue: widget.authName,
-                          onChanged: (value) {
-                            author = value;
-                          },
-                        )
-                      ],
                     ),
-                  )
-                ],
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            initialValue: widget.title,
+                            onChanged: (value) {
+                              title = value;
+                            },
+                          ),
+                          TextFormField(
+                            maxLines: 5,
+                            initialValue: widget.des,
+                            onChanged: (value) {
+                              desc = value;
+                            },
+                          ),
+                          TextFormField(
+                            initialValue: widget.authName,
+                            onChanged: (value) {
+                              author = value;
+                            },
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
     );
