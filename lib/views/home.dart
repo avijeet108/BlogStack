@@ -35,10 +35,30 @@ class _HomePageState extends State<HomePage> {
     return Container(
       child: Column(
         children: [
-          Text(
-            "$name" "'s Blogs",
-            style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 22, color: Colors.blue),
+          Container(
+            padding: EdgeInsets.all(10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Welcome ",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                      color: Colors.white),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "$name",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                      color: Colors.blue),
+                ),
+              ],
+            ),
           ),
           SizedBox(
             height: 15,
@@ -149,13 +169,17 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   FloatingActionButton(
+                    backgroundColor: Colors.blue,
                     onPressed: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => CreateBlog()));
                     },
-                    child: Icon(Icons.add),
+                    child: Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
                   )
                 ],
               ),

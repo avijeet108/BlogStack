@@ -176,7 +176,7 @@ class _LoginState extends State<Login> {
                             child: Padding(
                               padding: const EdgeInsets.all(6.0),
                               child: Text(
-                                'LogIn',
+                                'Log In',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 22.0,
@@ -203,7 +203,7 @@ class _LoginState extends State<Login> {
                                         builder: (context) => Reg()));
                               },
                               child: Text(
-                                ' SignUp',
+                                ' Sign up',
                                 style: TextStyle(
                                     color: Colors.blue,
                                     fontWeight: FontWeight.bold),
