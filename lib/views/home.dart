@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.white),
                 ),
                 SizedBox(
-                  width: 10,
+                  width: 5,
                 ),
                 Text(
                   "$name",
