@@ -1,4 +1,11 @@
 # BlogStack
+* A blog writing application with CRUD operations and authentication.
+
+## TechStack
+* App built with **Flutter Framework**.
+* **Cloud Firestore** for storing user details and all of their blog details.
+* SignIn and SignUp using **Firebase Authentication**.
+* **Firebase Storage** for storing all the images uploaded in the blogs.
 
 ## Sample Screens
 
