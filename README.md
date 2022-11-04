@@ -7,6 +7,9 @@
 * SignIn and SignUp using **Firebase Authentication**.
 * **Firebase Storage** for storing all the images uploaded in the blogs.
 
+## Download APK
+[Click to download](https://drive.google.com/file/d/1mBTLvF467y3KdS8Z40V4bQJlv81ETP4V/view?usp=sharing)
+
 ## Sample Screens
 
 ### Log In Screen
